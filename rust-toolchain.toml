@@ -1,0 +1,4 @@
+[toolchain]
+# need just one nightly feature >:(
+channel = "nightly"
+targets = ["wasm32-unknown-unknown"]
