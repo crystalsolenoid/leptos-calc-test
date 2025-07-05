@@ -29,17 +29,25 @@ fn App() -> impl IntoView {
             <input
                 id="quant"
                 type="number"
-                on:input:target=move |ev| { 
-            set_quant.set(ev.target().value());
-            if !custom_percent.get() {
-            if over_thresh().unwrap_or(false) {set_percent.set(20)}
-                else {set_percent.set(10)}
-            };
-        }
+                on:input:target=move |ev| {
+                    set_quant.set(ev.target().value());
+                    if !custom_percent.get() {
+                        if over_thresh().unwrap_or(false) {
+                            set_percent.set(20)
+                        } else {
+                            set_percent.set(10)
+                        }
+                    }
+                }
                 prop:value=quant
             />
             " + "
-            <PercentSelector setter=set_percent getter=percent custom=set_custom_percent thresh=Signal::derive(over_thresh)/>
+            <PercentSelector
+                setter=set_percent
+                getter=percent
+                custom=set_custom_percent
+                thresh=Signal::derive(over_thresh)
+            />
             " + 1 = "
             <ErrorBoundary fallback=|errors| view! { <span class="error">"???"</span> }>
                 <strong>{ten_percent}</strong>
